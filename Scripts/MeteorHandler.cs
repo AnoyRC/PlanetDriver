@@ -9,6 +9,8 @@ public class MeteorHandler : MonoBehaviour
     private SphereCollider _sc;
     private GravityHandler _gravityHandler;
     public float DestroyTimer = 20f;
+    public GameObject Rock;
+    public Material RockMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +33,14 @@ public class MeteorHandler : MonoBehaviour
     {
         if(collision.gameObject.tag == "Planet")
         {
-            _rb.detectCollisions = false;
+            _rb.Sleep();
             ParticleSystem.MainModule _main = _particleSystem.main;
             _main.startColor = Color.white;
             _main.startLifetime = 0.8f;
             _main.startSize= 1.2f;
             _sc.isTrigger = true;
             _gravityHandler.enabled = false;
+            Rock.GetComponent<MeshRenderer>().material = RockMaterial;
         }
     }
 }

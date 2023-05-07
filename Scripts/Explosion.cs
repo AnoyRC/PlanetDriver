@@ -1,14 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
-
-	public float moveSpeed = 10f;
-	public float rotationSpeed = 10f;
-
-	private float rotation;
-	private Rigidbody rb;
-    public bool isDead = false;
-
+public class Explosion : MonoBehaviour
+{
     public float cubeSize = 0.01f;
     public int cubesInRow = 3;
     public Material Base;
@@ -20,31 +15,39 @@ public class PlayerController : MonoBehaviour {
     public float explosionRadius = 4f;
     public float explosionUpward = 0.4f;
 
-    void Start ()
-	{
-		rb = GetComponent<Rigidbody>();
-	}
+    // Use this for initialization
+    void Start()
+    {
 
-	void Update ()
-	{
-		rotation = Input.GetAxisRaw("Horizontal");
-	}
 
-	void FixedUpdate ()
-	{
-		if (isDead) return;
-		rb.MovePosition(rb.position + transform.forward * moveSpeed * Time.fixedDeltaTime);
-		Vector3 yRotation = Vector3.up * rotation * rotationSpeed * Time.fixedDeltaTime;
-		Quaternion deltaRotation = Quaternion.Euler(yRotation);
-		Quaternion targetRotation = rb.rotation * deltaRotation;
-		rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, 50f * Time.deltaTime));
-		//transform.Rotate(0f, rotation * rotationSpeed * Time.fixedDeltaTime, 0f, Space.Self);
-	}
+        //calculate pivot distance
+        cubesPivotDistance = cubeSize * cubesInRow / 2;
+        //use this value to create pivot vector)
+        cubesPivot = new Vector3(cubesPivotDistance, cubesPivotDistance, cubesPivotDistance);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    private void OnTriggerEnter(UnityEngine.Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            explode();
+            other.gameObject.GetComponent<PlayerController>().isDead = true;
+            other.gameObject.GetComponent<PlayerController>().explode();
+        }
+
+    }
 
     public void explode()
     {
         //make object disappear
-
+        
 
         //loop 3 times to create 5x5x5 pieces in x,y,z coordinates
         for (int x = 0; x < cubesInRow; x++)
@@ -73,7 +76,6 @@ public class PlayerController : MonoBehaviour {
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionUpward);
             }
         }
-        gameObject.SetActive(false);
 
     }
 
@@ -95,5 +97,4 @@ public class PlayerController : MonoBehaviour {
         piece.AddComponent<GravityHandler>();
         piece.GetComponent<MeshRenderer>().material = Base;
     }
-
 }
