@@ -20,9 +20,12 @@ public class PlayerController : MonoBehaviour {
     public float explosionRadius = 4f;
     public float explosionUpward = 0.4f;
 
+    private GameController gameController;
+
     void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
 
 	void Update ()
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		if (isDead) return;
+        if (!gameController.hasStarted) return;
 		rb.MovePosition(rb.position + transform.forward * moveSpeed * Time.fixedDeltaTime);
 		Vector3 yRotation = Vector3.up * rotation * rotationSpeed * Time.fixedDeltaTime;
 		Quaternion deltaRotation = Quaternion.Euler(yRotation);

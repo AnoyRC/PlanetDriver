@@ -4942,7 +4942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862e5e089614f324286c154801ce46f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestroyTimer: 16
+  DestroyTimer: 25
   Rock: {fileID: 6805423129783775717}
   RockMaterial: {fileID: 2100000, guid: 086c2c8129f994b4db7df2ab9dbbfe4e, type: 2}
 --- !u!1001 &5958492750275939508
