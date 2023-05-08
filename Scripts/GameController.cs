@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -12,21 +14,37 @@ public class GameController : MonoBehaviour
     public bool hasStarted = false;
     public GameObject MeteorSpawner;
     private bool startedCoroutine =  false;
+    public GameObject[] cars;
+
+    public TextMeshProUGUI MultiplierHandler;
+    public TextMeshProUGUI ScoreCard;
+    public TextMeshProUGUI AlternateScoreCard;
+    public TextMeshProUGUI HighScoreCard;
+    public GameObject StartPanel;
+    public GameObject MainPanel;
+    public GameObject DeathPanel;
     // Start is called before the first frame update
     void Start()
     {
         highscore = PlayerPrefs.GetInt("highscore", 0);
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        HighScoreCard.text = highscore.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!hasStarted) return;
-        if (playerController.isDead) return;
+        if (playerController.isDead)
+        {
+            DeathPanel.SetActive(true);
+            MainPanel.SetActive(false);
+            return;
+        }
         MeteorSpawner.SetActive(true);
         CurrentScore += 0.3f * multiplier;
         score = (int) CurrentScore;
+ 
         if(score > highscore)
         {
             highscore = score;
@@ -37,6 +55,10 @@ public class GameController : MonoBehaviour
             StartCoroutine(IncrementSpeed());
             startedCoroutine = true;
         }
+
+        ScoreCard.text = score.ToString();
+        AlternateScoreCard.text = score.ToString();
+        HighScoreCard.text = highscore.ToString();
     }
 
     IEnumerator IncrementSpeed()
@@ -44,5 +66,20 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(15f);
         playerController.moveSpeed += 1;
         StartCoroutine(IncrementSpeed());
+    }
+
+    public void restartLevel()
+    {
+        SceneManager.LoadScene("MainGame");
+    }
+
+    public void CarSelect(int index)
+    {
+        multiplier = index;
+        hasStarted = true;
+        StartPanel.SetActive(false);
+        cars[index - 1].SetActive(true);
+        MultiplierHandler.text = index.ToString()+"X";
+        MainPanel.SetActive(true);
     }
 }

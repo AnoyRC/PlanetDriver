@@ -11,6 +11,7 @@ public class MeteorHandler : MonoBehaviour
     public float DestroyTimer = 20f;
     public GameObject Rock;
     public Material RockMaterial;
+    public GameObject crater;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,7 @@ public class MeteorHandler : MonoBehaviour
             _sc.isTrigger = true;
             _gravityHandler.enabled = false;
             Rock.GetComponent<MeshRenderer>().material = RockMaterial;
+            crater.SetActive(true);
         }
     }
 }
