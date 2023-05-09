@@ -82,4 +82,9 @@ public class GameController : MonoBehaviour
         MultiplierHandler.text = index.ToString()+"X";
         MainPanel.SetActive(true);
     }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
