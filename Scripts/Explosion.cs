@@ -7,6 +7,7 @@ public class Explosion : MonoBehaviour
     public float cubeSize = 0.01f;
     public int cubesInRow = 3;
     public Material Base;
+    private GameController gameController;
 
     float cubesPivotDistance;
     Vector3 cubesPivot;
@@ -18,7 +19,7 @@ public class Explosion : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
         //calculate pivot distance
         cubesPivotDistance = cubeSize * cubesInRow / 2;
@@ -40,6 +41,7 @@ public class Explosion : MonoBehaviour
             explode();
             other.gameObject.GetComponent<PlayerController>().isDead = true;
             other.gameObject.GetComponent<PlayerController>().explode();
+            gameController.Blast.Play();
         }
 
     }

@@ -23,6 +23,11 @@ public class GameController : MonoBehaviour
     public GameObject StartPanel;
     public GameObject MainPanel;
     public GameObject DeathPanel;
+
+    public AudioSource Theme;
+    public AudioSource Engine;
+    public AudioSource EngineStart;
+    public AudioSource Blast;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +44,7 @@ public class GameController : MonoBehaviour
         {
             DeathPanel.SetActive(true);
             MainPanel.SetActive(false);
+            Engine.Stop();
             return;
         }
         MeteorSpawner.SetActive(true);
@@ -81,6 +87,9 @@ public class GameController : MonoBehaviour
         cars[index - 1].SetActive(true);
         MultiplierHandler.text = index.ToString()+"X";
         MainPanel.SetActive(true);
+        Theme.Play();
+        Engine.Play();
+        EngineStart.Play();
     }
 
     public void Menu()
