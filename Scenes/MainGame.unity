@@ -7332,6 +7332,7 @@ GameObject:
   - component: {fileID: 1477949531}
   - component: {fileID: 1477949530}
   - component: {fileID: 1477949529}
+  - component: {fileID: 1477949532}
   m_Layer: 5
   m_Name: TristarSelecter
   m_TagString: Untagged
@@ -7435,7 +7436,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9981b989d8156f34e9af1a7a5bc2d74f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 331824b671a8c5d468e6bc0e12134089, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -7453,6 +7454,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477949527}
   m_CullTransparentMesh: 1
+--- !u!114 &1477949532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477949527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c38ac6c46f2fb4abc58cebbd75df75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkinName: Tristar
+  ImageUI:
+  - {fileID: 1477949530}
+  SpriteUI:
+  - {fileID: 21300000, guid: 9981b989d8156f34e9af1a7a5bc2d74f, type: 3}
 --- !u!1 &1520558187
 GameObject:
   m_ObjectHideFlags: 0
@@ -8254,6 +8272,7 @@ GameObject:
   - component: {fileID: 1836140793}
   - component: {fileID: 1836140792}
   - component: {fileID: 1836140791}
+  - component: {fileID: 1836140794}
   m_Layer: 5
   m_Name: ToyoyoSelecter
   m_TagString: Untagged
@@ -8357,7 +8376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 972586ba1d883ca429b702c9e6ddcc4e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f1fc6b73ccb392f4badd73079bc1db44, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8375,6 +8394,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836140789}
   m_CullTransparentMesh: 1
+--- !u!114 &1836140794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836140789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c38ac6c46f2fb4abc58cebbd75df75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkinName: Toyoyo
+  ImageUI:
+  - {fileID: 1836140792}
+  SpriteUI:
+  - {fileID: 21300000, guid: 972586ba1d883ca429b702c9e6ddcc4e, type: 3}
 --- !u!1001 &1838356745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8673,6 +8709,7 @@ GameObject:
   - component: {fileID: 1979694716}
   - component: {fileID: 1979694715}
   - component: {fileID: 1979694714}
+  - component: {fileID: 1979694717}
   m_Layer: 5
   m_Name: RobotSelector
   m_TagString: Untagged
@@ -8776,7 +8813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bfbff8d9aff11ab48877062672e850da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3026a2941a29bd3478b9c927bc1dc172, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8794,6 +8831,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979694712}
   m_CullTransparentMesh: 1
+--- !u!114 &1979694717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979694712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c38ac6c46f2fb4abc58cebbd75df75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkinName: Robot
+  ImageUI:
+  - {fileID: 1979694715}
+  SpriteUI:
+  - {fileID: 21300000, guid: bfbff8d9aff11ab48877062672e850da, type: 3}
 --- !u!1 &2009724820
 GameObject:
   m_ObjectHideFlags: 0

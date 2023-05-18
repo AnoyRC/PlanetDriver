@@ -81,15 +81,19 @@ public class GameController : MonoBehaviour
 
     public void CarSelect(int index)
     {
-        multiplier = index;
-        hasStarted = true;
-        StartPanel.SetActive(false);
-        cars[index - 1].SetActive(true);
-        MultiplierHandler.text = index.ToString()+"X";
-        MainPanel.SetActive(true);
-        Theme.Play();
-        Engine.Play();
-        EngineStart.Play();
+        string[] SkinIdentifier = { "Beetal", "Toyoyo", "Tristar", "Robot" };
+        if (ReneverseManager.SkinStats.ContainsKey(SkinIdentifier[index - 1]))
+        {
+            multiplier = index;
+            hasStarted = true;
+            StartPanel.SetActive(false);
+            cars[index - 1].SetActive(true);
+            MultiplierHandler.text = index.ToString() + "X";
+            MainPanel.SetActive(true);
+            Theme.Play();
+            Engine.Play();
+            EngineStart.Play();
+        }
     }
 
     public void Menu()
