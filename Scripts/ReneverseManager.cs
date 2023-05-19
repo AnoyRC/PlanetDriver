@@ -24,13 +24,29 @@ public class ReneverseManager : MonoBehaviour
 
     ReneAPICreds _reneAPICreds;
     API ReneAPI;
+    NotificationManager NotificationManager;
     // Start is called before the first frame update
     void Start()
     {
+        NotificationManager = NotificationManager.notificationManager;
+
+        if(Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            NotificationManager.Notify("WebGL version lacks login to reneverse, Kindly continue with Guest Mode");
+        }
+
         _reneAPICreds = ScriptableObject.CreateInstance<ReneAPICreds>();
         SkinStats["Beetal"] = true;
         if (LoginStatus)
             SignInPanel.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Application.Quit();
+        }
     }
 
     public async void SignIn()
@@ -38,8 +54,18 @@ public class ReneverseManager : MonoBehaviour
         await ConnectUser();
     }
 
+    public void SignUp()
+    {
+        Application.OpenURL("https://app.reneverse.io/register");
+    }
+
     public async void MintCars(string CarName){
         await Mint(CarName);
+    }
+
+    public void GuestMode()
+    {
+        SignInPanel.SetActive(false);
     }
 
     async Task ConnectUser()
@@ -53,12 +79,6 @@ public class ReneverseManager : MonoBehaviour
         Debug.Log(connected);
         if (!connected) return;
         StartCoroutine(ConnectReneService(ReneAPI));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private IEnumerator ConnectReneService(API reneApi)
@@ -76,12 +96,13 @@ public class ReneverseManager : MonoBehaviour
 
                 CountdownPanel.SetActive(false);
                 SignInPanel.SetActive(false);
-
+                
                 
                 yield return GetUserAssetsAsync(ReneAPI);
               
                 userConnected = true;
                 LoginStatus = true;
+                NotificationManager.Notify("Connected to Reneverse");
             }
 
             yield return new WaitForSeconds(secondsToDecrement);
@@ -102,8 +123,12 @@ public class ReneverseManager : MonoBehaviour
 
     public async Task Mint(string CarName)
     {
-        Debug.Log(ReneAPI.IsAuthorized());
-        if (CarName == "Toyoyo")
+        if(LoginStatus == false)
+        {
+            NotificationManager.Notify("Currently in Guest Mode, Restart to Log In");
+            return;
+        }
+        if (CarName == "Toyoyo" && !SkinStats.ContainsKey("Toyoyo"))
         {
             //Asset Template ID
             string assetTemplateId = "099492f0-a5e6-4030-a165-c59cafcabdc2";
@@ -145,15 +170,17 @@ public class ReneverseManager : MonoBehaviour
                 var Response = await ReneAPI.Game().AssetMint(assetTemplateId, assetMetadata, isTestnet);
                 Debug.Log(Response);
                 SkinStats["Toyoyo"] = true;
+                NotificationManager.Notify("Asset Minting in progress");
             }
             catch (Exception e)
             {
                 Debug.Log(e);
+                NotificationManager.Notify("There was a problem minting this asset");
             }
             
         }
 
-        if (CarName == "Tristar" )
+        if (CarName == "Tristar" && !SkinStats.ContainsKey("Tristar"))
         {
 
             //Asset Template ID
@@ -195,10 +222,12 @@ public class ReneverseManager : MonoBehaviour
                 var Response = await ReneAPI.Game().AssetMint(assetTemplateId, assetMetadata, isTestnet);
                 Debug.Log(Response);
                 SkinStats["Tristar"] = true;
+                NotificationManager.Notify("Asset Minting in progress");
             }
             catch (Exception e)
             {
                 Debug.Log(e);
+                NotificationManager.Notify("There was a problem minting this asset");
             }
         }
     }
