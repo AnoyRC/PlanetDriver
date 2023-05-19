@@ -77,7 +77,9 @@ public class ReneverseManager : MonoBehaviour
                 CountdownPanel.SetActive(false);
                 SignInPanel.SetActive(false);
 
-                yield return GetUserAssetsAsync(reneApi);
+                
+                yield return GetUserAssetsAsync(ReneAPI);
+              
                 userConnected = true;
                 LoginStatus = true;
             }
@@ -94,17 +96,15 @@ public class ReneverseManager : MonoBehaviour
         //By this way you could check in the Unity console your NFT assets
         userAssets?.Items.ForEach(asset =>
         {
-            Debug.Log(asset);
             SkinStats[asset.Metadata.Name.ToString()] = true;
         });
     }
 
     public async Task Mint(string CarName)
     {
-
-        if (CarName == "Toyoyo" && !SkinStats.ContainsKey(CarName))
+        Debug.Log(ReneAPI.IsAuthorized());
+        if (CarName == "Toyoyo")
         {
-
             //Asset Template ID
             string assetTemplateId = "099492f0-a5e6-4030-a165-c59cafcabdc2";
 
@@ -128,7 +128,7 @@ public class ReneverseManager : MonoBehaviour
                 Name = "Toyoyo",
                 Description = "A Sturdy Muscle car with 2x Multiplier.",
                 Image = "https://files.reneverse.io/asset_template/metadata-images/099492f0-a5e6-4030-a165-c59cafcabdc2/2a0df497-1b80-414a-9317-9c3515db6bb9/ToyoyoRender.png",
-                
+                AnimationUrl = null,
                 Attributes = new List<AssetsResponse.AssetsData.Asset.AssetMetadata.AssetAttribute>()
                 {
                     Color,
@@ -140,8 +140,17 @@ public class ReneverseManager : MonoBehaviour
             //Testnet Booleon
             bool isTestnet = true;
 
-            var Response = await ReneAPI.Game().AssetMint(assetTemplateId, assetMetadata, isTestnet);
-            Debug.Log(Response);
+            try
+            {
+                var Response = await ReneAPI.Game().AssetMint(assetTemplateId, assetMetadata, isTestnet);
+                Debug.Log(Response);
+                SkinStats["Toyoyo"] = true;
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
+            
         }
 
         if (CarName == "Tristar" )
@@ -170,7 +179,7 @@ public class ReneverseManager : MonoBehaviour
                 Name = "Tristar",
                 Description = "A Superfast sports car with 3x Multiplier.",
                 Image = "https://files.reneverse.io/asset_template/metadata-images/099492f0-a5e6-4030-a165-c59cafcabdc2/619d08b8-6277-4e9e-9649-98c40d6ac328/TristarRender.png",
-                
+                AnimationUrl = null,
                 Attributes = new List<AssetsResponse.AssetsData.Asset.AssetMetadata.AssetAttribute>()
                 {
                     Color,
@@ -180,8 +189,17 @@ public class ReneverseManager : MonoBehaviour
 
             //Testnet Booleon
             bool isTestnet = true;
-            var Response = await ReneAPI.Game().AssetMint(assetTemplateId, assetMetadata, isTestnet);
-            Debug.Log(Response);
+
+            try
+            {
+                var Response = await ReneAPI.Game().AssetMint(assetTemplateId, assetMetadata, isTestnet);
+                Debug.Log(Response);
+                SkinStats["Tristar"] = true;
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
         }
     }
 
