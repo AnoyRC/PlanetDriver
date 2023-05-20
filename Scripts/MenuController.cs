@@ -11,6 +11,7 @@ public class MenuController : MonoBehaviour
     public GameObject MainMenu;
     public GameObject Marketplace;
     private bool toggled = false;
+    public GameObject CreditPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,5 +42,10 @@ public class MenuController : MonoBehaviour
     public void ChangeToggle()
     {
         toggled = !toggled;
+    }
+
+    public void CreditsToggle()
+    {
+        CreditPanel.SetActive(!CreditPanel.activeSelf);
     }
 }
