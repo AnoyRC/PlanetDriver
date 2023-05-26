@@ -98,7 +98,8 @@ public class ReneverseManager : MonoBehaviour
                 SignInPanel.SetActive(false);
                 
                 
-                yield return GetUserAssetsAsync(ReneAPI);
+                yield return GetUserAssetsAsync(reneApi);
+                
               
                 userConnected = true;
                 LoginStatus = true;
@@ -128,47 +129,44 @@ public class ReneverseManager : MonoBehaviour
             NotificationManager.Notify("Currently in Guest Mode, Restart to Log In");
             return;
         }
-        if (CarName == "Toyoyo" && !SkinStats.ContainsKey("Toyoyo"))
+        if (CarName == "Toyoyo" && !SkinStats.ContainsKey("Toyoyo") )
         {
             //Asset Template ID
-            string assetTemplateId = "099492f0-a5e6-4030-a165-c59cafcabdc2";
+            string assetTemplateId = "905861f9-1ce7-4061-98c6-a915e20cc167";
 
             //Color Attribute
-            AssetsResponse.AssetsData.Asset.AssetMetadata.AssetAttribute Color = new()
+            AssetMetadata.AssetAttribute Color = new()
             {
-                TraitType = "Color",
-                Value = "Red"
+                displayType = "text",
+                traitType = "Color",
+                value = "Red"
             };
 
             //Type Attribute
-            AssetsResponse.AssetsData.Asset.AssetMetadata.AssetAttribute Type = new()
+            AssetMetadata.AssetAttribute Type = new()
             {
-                TraitType = "Type",
-                Value = "Muscle"
+                displayType = "text",
+                traitType = "Type",
+                value = "Muscle"
             };
 
             // Adding Toyoyo's Metadata
-            var assetMetadata = new AssetsResponse.AssetsData.Asset.AssetMetadata()
+            var assetMetadata = new AssetMetadata
             {
-                Name = "Toyoyo",
-                Description = "A Sturdy Muscle car with 2x Multiplier.",
-                Image = "https://files.reneverse.io/asset_template/metadata-images/099492f0-a5e6-4030-a165-c59cafcabdc2/2a0df497-1b80-414a-9317-9c3515db6bb9/ToyoyoRender.png",
-                AnimationUrl = null,
-                Attributes = new List<AssetsResponse.AssetsData.Asset.AssetMetadata.AssetAttribute>()
+                name = "Toyoyo",
+                description = "A Sturdy Muscle car with 2x Multiplier.",
+                imageFilename = "ToyoyoRender",
+                attributes = new List<AssetMetadata.AssetAttribute>()
                 {
                     Color,
                     Type
                 }, 
             };
 
-
-            //Testnet Booleon
-            bool isTestnet = true;
-
             try
             {
-                var Response = await ReneAPI.Game().AssetMint(assetTemplateId, assetMetadata, isTestnet);
-                Debug.Log(Response);
+                var response = await ReneAPI.Game().AssetMint(assetTemplateId);
+                Debug.Log(response);
                 SkinStats["Toyoyo"] = true;
                 NotificationManager.Notify("Asset Minting in progress");
             }
@@ -184,42 +182,41 @@ public class ReneverseManager : MonoBehaviour
         {
 
             //Asset Template ID
-            string assetTemplateId = "099492f0-a5e6-4030-a165-c59cafcabdc2";
+            string assetTemplateId = "c002e713-b9fa-481d-bb6d-3d99a08b7ac0";
 
             //Color Attribute
-            AssetsResponse.AssetsData.Asset.AssetMetadata.AssetAttribute Color = new()
+            AssetMetadata.AssetAttribute Color = new()
             {
-                TraitType = "Color",
-                Value = "Black"
+                displayType = "text",
+                traitType = "Color",
+                value = "Black"
             };
 
             //Type Attribute
-            AssetsResponse.AssetsData.Asset.AssetMetadata.AssetAttribute Type = new()
+            AssetMetadata.AssetAttribute Type = new()
             {
-                TraitType = "Type",
-                Value = "Sports"
+                displayType = "text",
+                traitType = "Type",
+                value = "Sports"
             };
 
             // Adding Tristar's Metadata
-            var assetMetadata = new AssetsResponse.AssetsData.Asset.AssetMetadata()
+            var assetMetadata = new AssetMetadata()
             {
-                Name = "Tristar",
-                Description = "A Superfast sports car with 3x Multiplier.",
-                Image = "https://files.reneverse.io/asset_template/metadata-images/099492f0-a5e6-4030-a165-c59cafcabdc2/619d08b8-6277-4e9e-9649-98c40d6ac328/TristarRender.png",
-                AnimationUrl = null,
-                Attributes = new List<AssetsResponse.AssetsData.Asset.AssetMetadata.AssetAttribute>()
+                name = "Tristar",
+                description = "A Superfast sports car with 3x Multiplier.",
+                imageFilename = "TristarRender",
+                animationFilename = null,
+                attributes = new List<AssetMetadata.AssetAttribute>()
                 {
                     Color,
                     Type
                 },
             };
 
-            //Testnet Booleon
-            bool isTestnet = true;
-
             try
             {
-                var Response = await ReneAPI.Game().AssetMint(assetTemplateId, assetMetadata, isTestnet);
+                var Response = await ReneAPI.Game().AssetMint(assetTemplateId);
                 Debug.Log(Response);
                 SkinStats["Tristar"] = true;
                 NotificationManager.Notify("Asset Minting in progress");

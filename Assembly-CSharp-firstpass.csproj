@@ -58,6 +58,10 @@
   <ItemGroup>
     <Compile Include="Assets\Plugins\ReneVerse\Scripts\ReneAPIManager.cs" />
     <Compile Include="Assets\Plugins\ReneVerse\Scripts\ReneAPICreds.cs" />
+    <Compile Include="Assets\Plugins\ReneVerse\Demo\Scripts\ReneAsset.cs" />
+    <Compile Include="Assets\Plugins\ReneVerse\Demo\Scripts\ReneVerseConnectEventArgs.cs" />
+    <Compile Include="Assets\Plugins\ReneVerse\Demo\Scripts\ReneVerseServiceExample.cs" />
+    <Compile Include="Assets\Plugins\ReneVerse\Demo\Scripts\ReneverseUIExample.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\ReneVerse\Assemblies\BouncyCastle.Crypto.dll" />

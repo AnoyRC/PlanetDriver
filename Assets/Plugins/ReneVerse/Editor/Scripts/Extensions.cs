@@ -1,10 +1,31 @@
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace ReneVerse.Editor
+namespace ReneVerse
 {
     public static class Extensions
     {
+        public static string AddPoint(this string str)
+        {
+            return str + ".";
+        }
+        public static bool IsEmail(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return false;
+            }
+
+            try
+            {
+                var address = new System.Net.Mail.MailAddress(str);
+                return address.Address == str;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public static string SeparateCamelCase(this string str)
         {
             if (string.IsNullOrEmpty(str))
